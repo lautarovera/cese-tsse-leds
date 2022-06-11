@@ -1,0 +1,58 @@
+---
+:source:
+  :path: test
+  :file: test_leds.c
+:successes:
+- :test: test_LedsOffAfterCreate
+  :line: 39
+  :message: ''
+  :unity_test_time: 0
+- :test: test_TurnOnOneLed
+  :line: 47
+  :message: ''
+  :unity_test_time: 0
+- :test: test_TurnOffOneLed
+  :line: 54
+  :message: ''
+  :unity_test_time: 0
+- :test: test_TurnOnAndOffManyLeds
+  :line: 62
+  :message: ''
+  :unity_test_time: 0
+- :test: test_InvalidUpperLimitTurnOnLed
+  :line: 72
+  :message: ''
+  :unity_test_time: 0
+- :test: test_TurnOnAllLeds
+  :line: 80
+  :message: ''
+  :unity_test_time: 0
+- :test: test_TurnOffAllLeds
+  :line: 87
+  :message: ''
+  :unity_test_time: 0
+- :test: test_GetStateLedOff
+  :line: 95
+  :message: ''
+  :unity_test_time: 0
+- :test: test_GetStateLedOn
+  :line: 106
+  :message: ''
+  :unity_test_time: 0
+- :test: test_OutboundParameterTurnOffLed
+  :line: 116
+  :message: ''
+  :unity_test_time: 0
+- :test: test_OutboundParameterGetStateLed
+  :line: 126
+  :message: ''
+  :unity_test_time: 0
+:failures: []
+:ignores: []
+:counts:
+  :total: 11
+  :passed: 11
+  :failed: 0
+  :ignored: 0
+:stdout: []
+:time: 0.001186189000691229
