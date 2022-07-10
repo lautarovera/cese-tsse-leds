@@ -16,10 +16,21 @@
 #include <stdio.h>
 #include "leds.h"
 
+#define MAX_NUM_LEDS 16
+#define MIN_NUM_LEDS 1
 #define LED_TO_BIT_OFFSET 1
 #define BITS_MASK 1
 #define LEDS_ALL_OFF 0x0000
 #define LEDS_ALL_ON 0xFFFF
+
+#define ASSERT_VALID_LED(led) \
+    ({bool retval = true; \
+    if ((led) < MIN_NUM_LEDS || (led) > MAX_NUM_LEDS) \
+    { \
+        Alerta("Número de led inválido"); \
+        retval = false; \
+    }; \
+    retval;})
 
 static uint16_t *puerto;
 static registro_errores_t RegistroErrores;
@@ -38,11 +49,7 @@ void LedsInit(uint16_t *direccion, registro_errores_t registro_errores)
 
 void LedTurnOn(uint8_t led)
 {
-    if (led > 16)
-    {
-        Alerta("Número de led inválido");
-    }
-    else
+    if (ASSERT_VALID_LED(led))
     {
         *puerto |= LedToMask(led);
     }
@@ -50,11 +57,7 @@ void LedTurnOn(uint8_t led)
 
 void LedTurnOff(uint8_t led)
 {
-    if (led > 16)
-    {
-        Alerta("Número de led inválido");
-    }
-    else
+    if (ASSERT_VALID_LED(led))
     {
         *puerto &= ~LedToMask(led);
     }
@@ -70,15 +73,15 @@ void LedTurnOffAll(void)
     *puerto = LEDS_ALL_OFF;
 }
 
-void LedGetState(uint8_t led, bool *led_state)
+bool LedGetState(uint8_t led, bool *led_state)
 {
-    if (led > 16)
-    {
-        Alerta("Número de led inválido");
-        led_state = NULL;
-    }
-    else
+    bool ret_val = false;
+
+    if (ASSERT_VALID_LED(led))
     {
         *led_state = (*puerto & LedToMask(led)) ? true : false;
+        ret_val = true;
     }
+
+    return ret_val;
 }
